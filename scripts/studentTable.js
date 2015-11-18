@@ -1,6 +1,8 @@
-var firstName = document.getElementById("firstName").value;
-var lastName = document.getElementById("lastName").value;
-var email = document.getElementById("emailAddress").value;
+
+
+var firstName;
+var lastName;
+var email;
 var mainTab = document.getElementById("mainTab");
 
 // Get all of the delete buttons
@@ -23,15 +25,22 @@ var addRows = document.getElementById("adding");
 // function that adds a row to the table
 function addRow(){
   debugger;
-  var row = mainTab.insertRow(-1);
+  firstName = document.getElementById("firstName").value;
+  lastName = document.getElementById("lastName").value;
+  email = document.getElementById("emailAddress").value;
+  var row = mainTab.insertRow(mainTab.rows.length -1);
   var cell1 = row.insertCell (0);
   var cell2 = row.insertCell (1);
   var cell3 = row.insertCell (2);
   var cell4 = row.insertCell (3);
-  cell1.innerHTML = "firstName";
-  cell2.innerHTML = "lastName";
-  cell3.innerHTML = "email";
-  cell4.innerHTML = "deleteButtons[0]"
+  var newDeleteButton = document.createElement("button");
+  newDeleteButton.setAttribute("class", "btn btn-danger");
+  newDeleteButton.appendChild(document.createTextNode("X"));
+  cell1.innerHTML = firstName;
+  cell2.innerHTML = lastName;
+  cell3.innerHTML = email;
+  cell4.appendChild(newDeleteButton);
+  newDeleteButton.addEventListener("click", deleteRow);
 }
 
 //timer that randomly between 5-10 secs deletes rows
