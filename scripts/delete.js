@@ -2,7 +2,7 @@
 var firstName;
 var lastName;
 var email;
-var mainTab; 
+var mainTab = document.getElementById("mainTab"); 
 
 // Get all of the delete buttons
 var deleteButtons = document.getElementsByClassName("btn-danger")
@@ -17,13 +17,48 @@ function deleteRow(){
   this.parentElement.parentElement.remove();
 }
 
-// Add an event listener to the plus button
+//timer that randomly between 5-10 secs deletes rows
+window.addEventListener("load", escape);
+debugger;
+function escape(){
+  mainTab= document.getElementById("mainTab");
+  var timerInterval=Math.floor((Math.random() * 5000) + 5000);
+  setInterval (function (){
+    if (mainTab.rows.length>1){
+      alert("They're escaping! Better add more!")
+      deleteButtons[0].parentNode.parentNode.remove();
+      return;
+    }
+  }, timerInterval);
+}
 
+// clearInterval
+
+// Add an event listener to the plus button
 var addRows = document.getElementById("adding");
-  addRows.addEventListener("click", addRow);
+addRows.addEventListener("click", addRow);
+
 // function that adds a row to the table
-function addRow(){
-  
+function addRow(){    
+  var boxCheck = document.getElementsByTagName("input");
+  var whichBox;
+  for (i=0; i<boxCheck.length; i++){
+    if(boxCheck[i].value===""){
+      switch (i) {
+        case 0: 
+        whichBox = "first name";
+        break;
+        case 1:
+        whichBox = "last name";
+        break
+        case 2:
+        whichBox = "email address";
+        break;
+      }
+      alert("Please fill out the " + whichBox + " box first");
+      return;
+    }
+  } 
   firstName = document.getElementById("firstName").value;
   lastName = document.getElementById("lastName").value;
   email = document.getElementById("emailAddress").value;
@@ -40,19 +75,4 @@ function addRow(){
   cell3.innerHTML = email;
   cell4.appendChild(newDeleteButton);
   newDeleteButton.addEventListener("click", deleteRow);
-}
-
-//timer that randomly between 5-10 secs deletes rows
-window.addEventListener("load", escape);
-function escape(){
-  debugger;
-  mainTab= document.getElementById("mainTab");
-  var timerInterval=Math.floor((Math.random() * 5000) + 5000);
-  if (mainTab.rows.length>1){
-    setInterval (function (){
-      alert("They're escaping! Better add more!")
-      deleteButtons[0].parentNode.parentNode.remove();
-        return;
-    }, timerInterval);
-  }
 }
