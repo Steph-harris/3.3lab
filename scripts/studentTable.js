@@ -1,9 +1,8 @@
 
-
 var firstName;
 var lastName;
 var email;
-var mainTab = document.getElementById("mainTab");
+var mainTab; 
 
 // Get all of the delete buttons
 var deleteButtons = document.getElementsByClassName("btn-danger")
@@ -24,7 +23,7 @@ var addRows = document.getElementById("adding");
   addRows.addEventListener("click", addRow);
 // function that adds a row to the table
 function addRow(){
-  debugger;
+  
   firstName = document.getElementById("firstName").value;
   lastName = document.getElementById("lastName").value;
   email = document.getElementById("emailAddress").value;
@@ -44,10 +43,16 @@ function addRow(){
 }
 
 //timer that randomly between 5-10 secs deletes rows
-
-// var timerInterval;
-// setInterval (function (){
-//   alert("They're escaping! Better add more!")
-//   deleteButtons[0].parentNode.parentNode.remove();
-//     clearInterval(setInterval);
-// }, 5000);
+window.addEventListener("load", escape);
+function escape(){
+  debugger;
+  mainTab= document.getElementById("mainTab");
+  var timerInterval=Math.floor((Math.random() * 5000) + 5000);
+  if (mainTab.rows.length>1){
+    setInterval (function (){
+      alert("They're escaping! Better add more!")
+      deleteButtons[0].parentNode.parentNode.remove();
+        return;
+    }, timerInterval);
+  }
+}
